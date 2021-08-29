@@ -85,6 +85,7 @@ class Users_account extends BaseController
     public function toJson($id = NULL)
     {
         $id = $id == NULL ? $this->request->getPostGet("indexer") : base64_decode(urldecode($id));
+        $this->response->setContentType('application/json');
 
         if ($id != NULL) {
             $result = $this->model->getById($id);
@@ -538,7 +539,6 @@ class Users_account extends BaseController
             'etag'     => 'excel_Users_account'
         ];
         $this->response->setCache($cacheOptions);
-
         // If you're serving to IE over SSL, then the following may be needed
         $this->response->setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
         $this->response->setLastModified(gmdate('D, d M Y H:i:s') . ' GMT');

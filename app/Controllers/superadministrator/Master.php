@@ -85,6 +85,7 @@ class Master extends BaseController
     public function toJson($id = NULL)
     {
         $id = $id == NULL ? $this->request->getPostGet("indexer") : base64_decode(urldecode($id));
+        $this->response->setContentType('application/json');
 
         if ($id != NULL) {
             $result = $this->model->getById($id);
@@ -471,8 +472,23 @@ class Master extends BaseController
             $excel->order = $sortorder;
             $excel->columnIndex = $sortcolumn;
         };
+
+        // Redirect output to a client’s web browser (Xlsx)
+        $this->response->setContentType('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $this->response->setHeader('Content-Disposition', 'attachment;filename="Assets ' . date("Y") . '.xlsx"');
+        // If you're serving to IE 9, then the following may be needed
+        $cacheOptions = [
+            'max-age'  => 1,
+            's-maxage' => 900,
+            'etag'     => 'excel_Assets'
+        ];
+        $this->response->setCache($cacheOptions);
+        // If you're serving to IE over SSL, then the following may be needed
+        $this->response->setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+        $this->response->setLastModified(gmdate('D, d M Y H:i:s') . ' GMT');
+        $this->response->setHeader('Cache-Control', 'cache')->appendHeader('Cache-Control', 'must-revalidate'); // HTTP/1.1
+        $this->response->setHeader('Pragma', 'public'); // HTTP/1.0
         $excel->export();
-        exit();
     }
 
     //IMPORTEXCELfunction
@@ -500,9 +516,10 @@ class Master extends BaseController
     }
 
     //EXPORTWORDfunction
-    public function toWord(){
-        header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=Master.doc");
+    public function toWord()
+    {
+        $this->response->setContentType('application/vnd.ms-word');
+        $this->response->setHeader('Content-Disposition', 'attachment;filename="Assets ' . date("Y") . '.doc"');
 
         // Table sorting using GET var
         $sortcolumn = $this->request->getGetPost("sortcolumn");
@@ -582,9 +599,9 @@ class Master extends BaseController
         $mdpfFilename = "Master " . date("d_m_Y") . ".pdf";
         $mpdf->WriteHTML($temp);
 
-        $this->response->setHeader('Content-Type', 'application/pdf');
-        $mpdf->Output($mdpfFilename, "I"); // opens in browser
-        exit();
+        $this->response->setContentType('application/pdf');
+        $this->response->setHeader('Content-Disposition', 'attachment;filename="' . $mdpfFilename . '"');
+        $mpdf->Output(); // opens in browser
     }
 
     //PRINTfunction
