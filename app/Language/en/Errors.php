@@ -8,7 +8,7 @@ return [
     'PasswordMissing'				=> 'Password  cannot be empty !',
     'PasswordMismatch'			 	=> 'Invalid password',
     'PasswordConfirmMismatch'		=> 'Password confirmation mismatch',
-    'LoginFailed' 					=> 'Username or Password is not incorrect',
+    'LoginFailed' 					=> 'Username or Password is incorrect',
     'DataNotExist'			 		=> 'Sorry... This data is missing !',
     'DataDuplicate'                => 'Sorry... This data already exist !',
     'FileNotExist'                 => 'Sorry... This file is missing !',

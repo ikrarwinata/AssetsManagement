@@ -14,6 +14,20 @@ class Home extends BaseController
 
 	protected function onLoad()
 	{
+		parent::onLoad();
+		$this->PageData = (object) [
+			'parent' => 'Home',
+			'header' => 'Home',
+			'title' => 'Home',
+			'subtitle' => [
+				'Home' => 'Home'
+			],
+			'url' => 'Home',
+			'stylesheets' => [],
+			'scripts' => [],
+			'locale' => 'id',
+			'access' => []
+		];
 		$this->userModel = new Users_account_model();
 		$this->companyModel = new Company_model();
 		
@@ -63,7 +77,8 @@ class Home extends BaseController
 
 	public function login()
 	{
-		$locale = $this->getLocale();
+		$this->getLocale();
+		$locale = $this->PageData->locale;
 		if (session()->has("isBlocked") && session("isBlocked") != NULL) return view("blocked", ["locale" => $locale]);
 		if ($this->captchaAttemps() > $this->maxCaptchaAttemps) return $this->blockIp();
 		if ($this->loginAttemps() > $this->maxLoginAttemps) return $this->reCaptcha();
@@ -72,7 +87,8 @@ class Home extends BaseController
 
 	public function login_auth($username = NULL, $password = NULL)
 	{
-		$locale = $this->getLocale();
+		$this->getLocale();
+		$locale = $this->PageData->locale;
 		if (session()->has("isBlocked") && session("isBlocked") != NULL) return view("blocked", ["locale" => $locale]);
 		if ($this->captchaAttemps() >= $this->maxCaptchaAttemps) return $this->blockIp();
 		if ($this->loginAttemps() > $this->maxLoginAttemps) return $this->reCaptcha();
@@ -85,6 +101,7 @@ class Home extends BaseController
 			$logedIn = $this->userModel->where(['username' => $username, 'password' => $password])->first();
 			if ($logedIn) {
 				session()->set("loginAttemps", 0);
+				session()->set("captchaAttemps", 0);
 				$sessData = [];
 				foreach ($logedIn as $key => $value) {
 					$sessData[$key] = $value;

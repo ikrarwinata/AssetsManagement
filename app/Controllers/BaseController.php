@@ -73,21 +73,16 @@ class BaseController extends Controller
 				$this->request->setLocale(session('locale'));
 			}
 		} else {
-			$this->thisLocale($this->setLocale());
+			$this->setLocale();
 		}
 		return $this->thisLocale();
 	}
 
 	protected function thisLocale($newLocale = null)
 	{
-		if (is_array($this->PageData)) {
-			if ($newLocale != NULL) $this->PageData['locale'] = $newLocale;
-			return $this->PageData['locale'];
-		} else {
-			if (isset($this->PageData->locale)) {
-				if ($newLocale != NULL) $this->PageData->locale = $newLocale;
-				return $this->PageData->locale;
-			}
+		if (isset($this->PageData->locale)) {
+			if ($newLocale != NULL) $this->PageData->locale = $newLocale;
+			return $this->PageData->locale;
 		}
 		return NULL;
 	}
