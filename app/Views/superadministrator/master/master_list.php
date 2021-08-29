@@ -161,10 +161,12 @@ $this->section('content');
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn btn-sm btn-outline-warning ml-2 mt-2 mb-2" title="<?php echo lang("Tooltips.DeleteSelected", [], $Page->locale) ?>" onclick="return confirm('<?php echo lang('Promp.DeleteSelected', [], $Page->locale) ?>')">
-                                <i class="fa fa-minus-square"></i>&nbsp;<?php echo lang("Button.DeleteSelected", [], $Page->locale) ?>
-                            </button>
-                            <a href="<?php echo site_url($Page->parent . '/truncate') ?>" class="btn btn-sm btn-outline-danger ml-2 mt-2 mb-2" onclick="return confirm('<?php echo lang('Promp.Truncate', [], $Page->locale) ?>')">
+                            <?php if (count($data) >= 1) : ?>
+                                <button type="submit" class="btn btn-sm btn-outline-warning ml-2 mt-2 mb-2" title="<?php echo lang("Tooltips.DeleteSelected", [], $Page->locale) ?>" onclick="return confirm('<?php echo lang('Promp.DeleteSelected', [], $Page->locale) ?>')">
+                                    <i class="fa fa-minus-square"></i>&nbsp;<?php echo lang("Button.DeleteSelected", [], $Page->locale) ?>
+                                </button>
+                            <?php endif; ?>
+                            <a href="<?php echo site_url($Page->parent . '/truncate') ?>" class="btn btn-sm btn-outline-danger ml-2 mt-2 mb-2 <?php echo (count($data) == 0 ? 'disabled' : NULL) ?>" onclick="return confirm('<?php echo lang('Promp.Truncate', [], $Page->locale) ?>')">
                                 <i class="fa fa-trash"></i>&nbsp;<?php echo lang("Button.Truncate", [], $Page->locale) ?>
                             </a>
                         </div>
