@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->extend($Template->container);
 $this->section('content'); ?>
 <div class="">
@@ -34,20 +34,34 @@ $this->section('content'); ?>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>&nbsp;<span class="<?php echo session()->getFlashdata("ci_flash_message_email_type"); ?>"><small><?php echo session()->getFlashdata("ci_flash_message_email"); ?></small></span>
-                            <input type="text" class="form-control" autocomplete="on" name="email" id="email" maxlength="100" placeholder="Email" value="<?php echo $data->email; ?>"  />
+                            <input type="text" class="form-control" autocomplete="on" name="email" id="email" maxlength="100" placeholder="Email" value="<?php echo $data->email; ?>" />
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>&nbsp;<span class="<?php echo session()->getFlashdata("ci_flash_message_phone_type"); ?>"><small><?php echo session()->getFlashdata("ci_flash_message_phone"); ?></small></span>
-                            <input type="text" class="form-control" autocomplete="on" name="phone" id="phone" maxlength="50" placeholder="Phone" value="<?php echo $data->phone; ?>"  />
+                            <input type="text" class="form-control" autocomplete="on" name="phone" id="phone" maxlength="50" placeholder="Phone" value="<?php echo $data->phone; ?>" />
                         </div>
                         <div class="form-group">
                             <label for="level">Level</label>&nbsp;<span class="<?php echo session()->getFlashdata("ci_flash_message_level_type"); ?>"><small><?php echo session()->getFlashdata("ci_flash_message_level"); ?></small></span>
                             <input type="radio" name="level" id="level" value="<?php echo $data->level; ?>" required="true" />&nbsp;<label for="level">level</label>
                         </div>
+                        <div class="form-group">
+                            <label for="img">Img</label>&nbsp;<span class="<?php echo session()->getFlashdata("ci_flash_message_img_type"); ?>"><small><?php echo session()->getFlashdata("ci_flash_message_img"); ?></small></span>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <input type="hidden" id="oldimg" class="hide hidden d-none" name="oldimg" style="display:none;" value="<?php echo (isset($data->img) ? $data->img : NULL); ?>">
+                                    <input type="file" name="img" id="img" accept="*" class="form-control">
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <?php if (isset($data->img) && $data->img != NULL) : ?>
+                                        <a href="<?php echo $data->img ?>" class="btn btn-md btn-default">File</a>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                        </div>
                         <input type="hidden" id="oldusername" class="form-control" name="oldusername" style="display:none;" value="<?php echo $data->username ?>">
                         <div class="d-flex p-2 bd-highlight">
                             <div class="form-group">
-                                <a class="btn btn-sm btn-danger" href="<?php echo base_url($Page->parent.'/index') ?>"><?php echo lang("Button.Cancel", [], $Page->locale) ?></a>
+                                <a class="btn btn-sm btn-danger" href="<?php echo base_url($Page->parent . '/index') ?>"><?php echo lang("Button.Cancel", [], $Page->locale) ?></a>
                                 <button class="btn btn-sm btn-primary" type="submit"><?php echo lang("Button.Save", [], $Page->locale) ?></button>
                             </div>
                         </div>

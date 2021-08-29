@@ -6,17 +6,20 @@ namespace App\Controllers\superadministrator;
 * Codeigniter Controller
 **/
 use App\Models\Master_model;
+use App\Models\Company_model;
 use App\Controllers\BaseController;
 
 class Dashboard extends BaseController
 {
     protected $masterModel;
+    protected $companyModel;
     /**
      * Class constructor.
      */ 
     public function __construct()
     {
         $this->masterModel = new Master_model(); //Set Default Models Of this Controller
+        $this->companyModel = new Company_model(); //Set Default Models Of this Controller
         $this->PageData = $this->defaultPage(); //Attribute Of this Page
         $this->Template = $this->defaultTemplate(); //Template Of this Page
         $this->pager = \Config\Services::pager(); // Pagination
@@ -33,7 +36,12 @@ class Dashboard extends BaseController
             session()->setFlashdata("ci_login_flash_message_type", "text-danger");
             throw new \CodeIgniter\Router\Exceptions\RedirectException();
         };
-    
+
+        $sessionCompany = [];
+        foreach ($this->companyModel->findAll() as $key => $value) {
+            $sessionCompany[$value->index_key] = $value->com_value;
+        };
+        session()->set($sessionCompany);
     }
     
     //ATRIBUTE OF THIS PAGE
@@ -41,7 +49,7 @@ class Dashboard extends BaseController
     {
         return (object) [
             'parent' => 'superadministrator/Dashboard',
-            'header' => (session("level") == NULL ? NULL : session("level") . " :: ") . 'Master', 
+            'header' => (session("level") == NULL ? NULL : session("level") . " :: ") . 'Dashboard', 
             'title' => 'Dashboard',
             'subtitle' => [
                 'Dashboard' => 'superadministrator/Dashboard/index'

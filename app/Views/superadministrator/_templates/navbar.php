@@ -151,13 +151,13 @@
 		</li>
 		<li class="nav-item dropdown user-menu">
 			<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-				<img src="assets/img/user.png" class="user-image img-circle elevation-2" alt="User Image">
+				<img src="<?php echo (session('img')) ?>" class="user-image img-circle elevation-2" alt="User Image">
 				<span class="d-none d-md-inline"><?php echo (strCut(session("nick_name"), 25)) ?></span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 				<!-- User image -->
 				<li class="user-header bg-primary">
-					<img src="assets/img/user.png" class="img-circle elevation-2" alt="User Image">
+					<img src="<?php echo (session('img')) ?>" class="img-circle elevation-2" alt="User Image">
 
 					<p>
 						<?php echo (strCut(session("full_name"), 28)) ?>

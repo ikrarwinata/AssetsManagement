@@ -1,8 +1,8 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <img src="assets/img/asset.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Assets Management</span>
+        <img src="<?php echo (session('company_logo')) ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light"><?php echo (session('company_name')) ?></span>
     </a>
 
     <!-- Sidebar -->
@@ -166,6 +166,11 @@
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
+    </div>
+
+    <div class="sidebar-custom">
+        <a href="<?php echo (base_url('superadministrator/Company/index')) ?>" class="btn btn-link" title="<?php echo (lang('Sidebar.Settings', [], $Page->locale)) ?>"><i class="fas fa-cogs"></i></a>
+        <a href="<?php echo (base_url('Home/logout')) ?>" class="btn btn-link hide-on-collapse pos-right" title="<?php echo (lang('Sidebar.SignOut', [], $Page->locale)) ?>"><i class="fa fa-sign-out-alt"></i></a>
     </div>
     <!-- /.sidebar -->
 </aside>

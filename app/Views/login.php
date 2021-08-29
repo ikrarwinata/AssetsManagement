@@ -50,7 +50,7 @@
 					<div class="row">
 						<div class="col-8">
 							<div class="icheck-primary">
-								<input type="checkbox" id="remember" name="keepalive" value="1">
+								<input type="checkbox" id="remember" name="keepalive" checked value="1">
 								<label for="remember">
 									Remember Me
 								</label>

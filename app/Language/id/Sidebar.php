@@ -39,4 +39,5 @@ return [
     'Simulation' => 'Simulasi',
     'SignOut' => 'Keluar',
     'Profile' => 'Profil',
+    'Settings' => 'Pengaturan Website',
 ];

@@ -283,6 +283,7 @@ class Users_account extends BaseController
                 'email' => set_value('email'),
                 'phone' => set_value('phone'),
                 'level' => set_value('level'),
+                'img' => set_value('img'),
             ],
             'action' => site_url($this->PageData->parent.'/createAction'),
             'Page' => $this->PageData,
@@ -307,6 +308,19 @@ class Users_account extends BaseController
             'phone' => $this->request->getPost('phone'),
             'level' => $this->request->getPost('level'),
         ];
+
+        if ($img = $this->request->getFile('img')) {
+            if ($img->isValid()) {
+                if (!$img->hasMoved()) {
+                    $imgnewName = $img->getRandomName();
+                    $img->move(WRITEPATH . 'uploads/user_img', $imgnewName);
+                }
+                $data['img'] = WRITEPATH . 'uploads/user_img/' . $img->getName();
+            } else {
+                session()->setFlashdata('ci_flash_message_img', $img->getErrorString() . ' (' . $img->getError() . ')');
+                session()->setFlashdata('ci_flash_message_img_type', ' text-danger ');
+            };
+        };
         
         $this->model->insert($data);
         session()->setFlashdata('ci_flash_message', lang("Default.CreateSuccess", [], $this->PageData->locale));
@@ -343,6 +357,7 @@ class Users_account extends BaseController
                 'email' => set_value('email', $dataFind->email),
                 'phone' => set_value('phone', $dataFind->phone),
                 'level' => set_value('level', $dataFind->level),
+                'img' => set_value('img'),
             ],
             'action' => site_url($this->PageData->parent.'/updateAction'),
             'Page' => $this->PageData,
@@ -376,6 +391,26 @@ class Users_account extends BaseController
             'phone' => $this->request->getPost('phone'),
             'level' => $this->request->getPost('level'),
         ];
+
+        if ($img = $this->request->getFile('img')) {
+            if ($img->isValid()) {
+                if (!$img->hasMoved()) {
+                    $imgnewName = $img->getRandomName();
+                    $img->move(WRITEPATH . 'uploads/user_img', $imgnewName);
+                }
+                $data['img'] = WRITEPATH . 'uploads/user_img/' . $img->getName();
+            } else {
+                session()->setFlashdata('ci_flash_message_img', $img->getErrorString() . '(' . $img->getError() . ')');
+                session()->setFlashdata('ci_flash_message_img_type', ' text-danger ');
+            };
+            if ($this->request->getPost('oldimg') != NULL) {
+                if (file_exists($this->request->getPost('oldimg'))) {
+                    if (!is_dir($this->request->getPost('oldimg'))) {
+                        unlink($this->request->getPost('oldimg'));
+                    }
+                }
+            }
+        };
         
         $this->model->update($id, $data);
         session()->setFlashdata('ci_flash_message', lang("Default.UpdateSuccess", [], $this->PageData->locale));
@@ -390,7 +425,15 @@ class Users_account extends BaseController
         $row = $this->model->getById($id);
 
         if ($row && $id != NULL) {
-            
+            if (isset($row->img)) {
+                if ($row->img != NULL) {
+                    if (file_exists($row->img)) {
+                        if (!is_dir($row->img)) {
+                            unlink($row->img);
+                        }
+                    }
+                }
+            }
             
             $this->model->delete($id);
             session()->setFlashdata('ci_flash_message', lang("Default.DeleteSuccess", [], $this->PageData->locale));
@@ -409,11 +452,19 @@ class Users_account extends BaseController
         $arr = $this->request->getPost("removeme");
         $res = 0;
         if ($arr!=NULL) {
-            if (count($arr)>=1) {
+            if (count($arr) >= 1) {
                 foreach ($arr as $key => $id) {
                     $row = $this->model->getById($id);
-                    if (! $row || $id == NULL) continue;
-                    
+                    if (!$row || $id == NULL) continue;
+                    if (isset($row->img)) {
+                        if ($row->img != NULL) {
+                            if (file_exists($row->img)) {
+                                if (!is_dir($row->img)) {
+                                    unlink($row->img);
+                                }
+                            }
+                        }
+                    }
                     $this->model->delete($id);
                     $res++;
                 }
@@ -476,8 +527,24 @@ class Users_account extends BaseController
             $excel->order = $sortorder;
             $excel->columnIndex = $sortcolumn;
         };
+
+        // Redirect output to a client’s web browser (Xlsx)
+        $this->response->setContentType('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $this->response->setHeader('Content-Disposition', 'attachment;filename="Users_account ' . date("Y") . '.xlsx"');
+        // If you're serving to IE 9, then the following may be needed
+        $cacheOptions = [
+            'max-age'  => 1,
+            's-maxage' => 900,
+            'etag'     => 'excel_Users_account'
+        ];
+        $this->response->setCache($cacheOptions);
+
+        // If you're serving to IE over SSL, then the following may be needed
+        $this->response->setHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT');
+        $this->response->setLastModified(gmdate('D, d M Y H:i:s') . ' GMT');
+        $this->response->setHeader('Cache-Control', 'cache')->appendHeader('Cache-Control', 'must-revalidate'); // HTTP/1.1
+        $this->response->setHeader('Pragma', 'public'); // HTTP/1.0
         $excel->export();
-        exit();
     }
 
     //IMPORTEXCELfunction
@@ -505,9 +572,10 @@ class Users_account extends BaseController
     }
 
     //EXPORTWORDfunction
-    public function toWord(){
-        header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=Users_account.doc");
+    public function toWord()
+    {
+        $this->response->setContentType('application/vnd.ms-word');
+        $this->response->setHeader('Content-Disposition', 'attachment;filename="Users_account ' . date("Y") . '.doc"');
 
         // Table sorting using GET var
         $sortcolumn = $this->request->getGetPost("sortcolumn");
@@ -587,9 +655,9 @@ class Users_account extends BaseController
         $mdpfFilename = "Users_account " . date("d_m_Y") . ".pdf";
         $mpdf->WriteHTML($temp);
 
-        $this->response->setHeader('Content-Type', 'application/pdf');
-        $mpdf->Output($mdpfFilename, "I"); // opens in browser
-        exit();
+        $this->response->setContentType('application/pdf');
+        $this->response->setHeader('Content-Disposition', 'attachment;filename="' . $mdpfFilename . '"');
+        $mpdf->Output(); // opens in browser
     }
 
     //PRINTfunction

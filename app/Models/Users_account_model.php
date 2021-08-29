@@ -19,7 +19,7 @@ class Users_account_model extends Model
     //To help protect against Mass Assignment Attacks, the Model class requires 
     //that you list all of the field names that can be changed during inserts and updates
     // https://codeigniter4.github.io/userguide/models/model.html#protecting-fields
-    protected $allowedFields = ['username', 'password', 'full_name', 'nick_name', 'email', 'phone', 'level'];
+    protected $allowedFields = ['username', 'password', 'full_name', 'nick_name', 'email', 'phone', 'level', 'img'];
 
     protected $useAutoIncrement = false;
 
@@ -81,12 +81,13 @@ class Users_account_model extends Model
         };
         $this
             ->groupStart()
-            ->like($this->table . '.password', $keyword)
+            ->like($this->table . '.username', $keyword)
             ->orLike($this->table . '.full_name', $keyword)
             ->orLike($this->table . '.nick_name', $keyword)
             ->orLike($this->table . '.email', $keyword)
             ->orLike($this->table . '.phone', $keyword)
             ->orLike($this->table . '.level', $keyword)
+            ->orLike($this->table . '.img', $keyword)
             ->groupEnd();
         return $this->sort();
     }
@@ -151,7 +152,7 @@ class Users_account_model extends Model
         $highestColumn = "G";
         $spreadsheet->setActiveSheetIndex(0)
         ->setCellValue('A'.$startRowHeader, '#')
-        ->setCellValue('B'.$startRowHeader, 'Password')
+        ->setCellValue('B'.$startRowHeader, 'Username')
         ->setCellValue('C'.$startRowHeader, 'Full_name')
         ->setCellValue('D'.$startRowHeader, 'Nick_name')
         ->setCellValue('E'.$startRowHeader, 'Email')
@@ -185,35 +186,23 @@ class Users_account_model extends Model
         $data_users_account = $this->orderBy($this->columnIndex, $this->order)->findAll();
         foreach ($data_users_account as $key => $users_account) {
             $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$startRowBody, ++$index);
-            if(isset($users_account->password))
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('B'.$startRowBody, $users_account->password, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+            if(isset($users_account->username))
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('B'.$startRowBody, $users_account->username, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             if(isset($users_account->full_name))
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('C'.$startRowBody, $users_account->full_name, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('D'.$startRowBody, $users_account->full_name, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             if(isset($users_account->nick_name))
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('D'.$startRowBody, $users_account->nick_name, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('E'.$startRowBody, $users_account->nick_name, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             if(isset($users_account->email))
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('E'.$startRowBody, $users_account->email, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('F'.$startRowBody, $users_account->email);
             if(isset($users_account->phone))
-                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('F'.$startRowBody, $users_account->phone, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValueExplicit('G'.$startRowBody, $users_account->phone, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             if(isset($users_account->level))
-                $spreadsheet->setActiveSheetIndex(0)->setCellValue('G'.$startRowBody, $users_account->level);
+                $spreadsheet->setActiveSheetIndex(0)->setCellValue('H'.$startRowBody, $users_account->level);
             $startRowBody++;
         };
 
         $spreadsheet->getActiveSheet()->setTitle('Users_account Data '.date('Y'));
         $spreadsheet->setActiveSheetIndex(0);
-        // Redirect output to a client’s web browser (Xlsx)
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Users_account '.date("Y").'.xlsx"');
-        header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
-        header('Cache-Control: max-age=1');
-
-        // If you're serving to IE over SSL, then the following may be needed
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-        header('Pragma: public'); // HTTP/1.0
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $writer->save('php://output');
@@ -251,33 +240,39 @@ class Users_account_model extends Model
             if ($startImport == TRUE) {
                 $insertData = [];
                 if (isset($cellData[0][$startColumnIndex + 0])){
-                    $insertData["password"] = $cellData[0][$startColumnIndex + 0];
+                    $insertData["username"] = $cellData[0][$startColumnIndex + 0];
                     $doInsert = TRUE;
                 }else {
                     $doInsert = FALSE;
                 }
                 if (isset($cellData[0][$startColumnIndex + 1])){
-                    $insertData["full_name"] = $cellData[0][$startColumnIndex + 1];
+                    $insertData["password"] = $cellData[0][$startColumnIndex + 1];
                     $doInsert = TRUE;
                 }else {
                     $doInsert = FALSE;
                 }
                 if (isset($cellData[0][$startColumnIndex + 2])){
-                    $insertData["nick_name"] = $cellData[0][$startColumnIndex + 2];
+                    $insertData["full_name"] = $cellData[0][$startColumnIndex + 2];
                     $doInsert = TRUE;
                 }else {
                     $doInsert = FALSE;
                 }
                 if (isset($cellData[0][$startColumnIndex + 3])){
-                    $insertData["email"] = $cellData[0][$startColumnIndex + 3];
+                    $insertData["nick_name"] = $cellData[0][$startColumnIndex + 3];
                     $doInsert = TRUE;
+                }else {
+                    $doInsert = FALSE;
                 }
                 if (isset($cellData[0][$startColumnIndex + 4])){
-                    $insertData["phone"] = $cellData[0][$startColumnIndex + 4];
+                    $insertData["email"] = $cellData[0][$startColumnIndex + 4];
                     $doInsert = TRUE;
                 }
                 if (isset($cellData[0][$startColumnIndex + 5])){
-                    $insertData["level"] = $cellData[0][$startColumnIndex + 5];
+                    $insertData["phone"] = $cellData[0][$startColumnIndex + 5];
+                    $doInsert = TRUE;
+                }
+                if (isset($cellData[0][$startColumnIndex + 6])){
+                    $insertData["level"] = $cellData[0][$startColumnIndex + 6];
                     $doInsert = TRUE;
                 }else {
                     $doInsert = FALSE;
@@ -290,12 +285,13 @@ class Users_account_model extends Model
             } else {
                 if (
                     // jika kolom pertama tanpa nomor
-                    strtolower($cellData[0][0]) == "password" &&
-                    strtolower($cellData[0][1]) == "full_name" &&
-                    strtolower($cellData[0][2]) == "nick_name" &&
-                    strtolower($cellData[0][3]) == "email" &&
-                    strtolower($cellData[0][4]) == "phone" &&
-                    strtolower($cellData[0][5]) == "level"
+                    strtolower($cellData[0][0]) == "username" &&
+                    strtolower($cellData[0][1]) == "password" &&
+                    strtolower($cellData[0][2]) == "full_name" &&
+                    strtolower($cellData[0][3]) == "nick_name" &&
+                    strtolower($cellData[0][4]) == "email" &&
+                    strtolower($cellData[0][5]) == "phone" &&
+                    strtolower($cellData[0][6]) == "level"
                 ) {
                     $startImport = TRUE;
                     $startColumnIndex = 0;
@@ -303,12 +299,13 @@ class Users_account_model extends Model
                 (
                     // jika kolom pertama adalah nomor
                     (strtolower($cellData[0][0]) == "no" || strtolower($cellData[0][0]) == "#") &&
-                    strtolower($cellData[0][1]) == "password" &&
-                    strtolower($cellData[0][2]) == "full_name" &&
-                    strtolower($cellData[0][3]) == "nick_name" &&
-                    strtolower($cellData[0][4]) == "email" &&
-                    strtolower($cellData[0][5]) == "phone" &&
-                    strtolower($cellData[0][6]) == "level"
+                    strtolower($cellData[0][1]) == "username" &&
+                    strtolower($cellData[0][2]) == "password" &&
+                    strtolower($cellData[0][3]) == "full_name" &&
+                    strtolower($cellData[0][4]) == "nick_name" &&
+                    strtolower($cellData[0][5]) == "email" &&
+                    strtolower($cellData[0][6]) == "phone" &&
+                    strtolower($cellData[0][7]) == "level"
                 ) {
                     $startImport = TRUE;
                     $startColumnIndex = 1;

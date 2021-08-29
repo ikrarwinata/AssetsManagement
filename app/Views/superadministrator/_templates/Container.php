@@ -8,7 +8,7 @@
 		<!-- Preloader -->
 		<?php if (isset($loader) && $loader == 1) : ?>
 			<div class="preloader flex-column justify-content-center align-items-center">
-				<img class="animation__shake" src="assets/img/asset.png" alt="AdminLTELogo" height="60" width="60">
+				<img class="animation__shake" src="<?php echo (session('image_loader')) ?>" alt="Loader" height="60" width="60">
 			</div>
 		<?php endif; ?>
 

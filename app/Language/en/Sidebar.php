@@ -39,4 +39,5 @@ return [
     'Simulation' => 'Simulation',
     'SignOut' => 'Sign Out',
     'Profile' => 'Profile',
+    'Settings' => 'Website Settings',
 ];

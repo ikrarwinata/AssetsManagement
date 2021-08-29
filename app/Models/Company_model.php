@@ -8,17 +8,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Main_table_model extends Model
+class Company_model extends Model
 {
-    protected $table      = 'main_table';
-    protected $primaryKey = 'indexer';
+    protected $table      = 'company';
+    protected $primaryKey = 'index_key';
 
     //To help protect against Mass Assignment Attacks, the Model class requires 
     //that you list all of the field names that can be changed during inserts and updates
     // https://codeigniter4.github.io/userguide/models/model.html#protecting-fields
-    protected $allowedFields = ['indexer', 'long_text', 'mid_text', 'currencys'];
+    protected $allowedFields = ['index_key', 'com_value', 'com_text'];
 
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = false;
 
     // protected $returnType     = 'array';
     protected $returnType     = 'object';
@@ -34,7 +34,7 @@ class Main_table_model extends Model
     protected $skipValidation     = false;
 
     public $order = "DESC";
-    public $columnIndex = "indexer";
+    public $columnIndex = "index_key";
 
     public function getFields(){
         return $this->allowedFields;
@@ -78,9 +78,9 @@ class Main_table_model extends Model
         };
         $this
             ->groupStart()
-            ->like($this->table . '.long_text', $keyword)
-            ->orLike($this->table . '.mid_text', $keyword)
-            ->orLike($this->table . '.currencys', $keyword)
+            ->like($this->table . '.index_key', $keyword)
+            ->orLike($this->table . '.com_value', $keyword)
+            ->orLike($this->table . '.com_text', $keyword)
             ->groupEnd();
         return $this->sort();
     }
