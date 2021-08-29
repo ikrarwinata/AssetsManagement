@@ -1,0 +1,20 @@
+.search-value-nav {
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-left: 1px solid grey;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.search-btn-nav {
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    border-right: 1px solid grey;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.search-btn-nav-closed {
+    border: 1px solid grey;
+    border-radius: 25px;
+}

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'Select' => 'Pilih',
+    'SelectAll' => 'Pilih Semua',
+    'Read' => 'Lihat',
+    'Close' => 'Tutup',
+    'Save' => 'Simpan',
+    'Delete' => 'Hapus',
+    'DeleteSelected' => 'Hapus data terpilih',
+    'Delete' => 'Hapus',
+    'DeleteAll' => 'Hapus Semua',
+    'Cancel' => 'Batalkan',
+    'Back' => 'Kembali',
+    'CreateData' => 'Tambah Data',
+    'UpdateData' => 'Ubah Item',
+    'SearchData' => 'Cari',
+    'ResetSearch' => 'Reset',
+    'Truncate' => 'Bersihkan Semua Data',
+    'Show' => 'Tampilkan',
+    'ForgotPassword' => 'Lupa password?',
+    'Login' => 'Masuk',
+    'Logout' => 'Keluar',
+    'Profile' => 'Profil Saya',
+    'RememberLogin' => 'Ingat saya',
+    'Generate' => 'Buat',
+    'TruncateData' => 'Bersihkan data {obj}',
+];
