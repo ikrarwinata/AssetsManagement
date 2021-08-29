@@ -67,17 +67,19 @@ class Home extends BaseController
 		return view("login", ["locale" => $locale]);
 	}
 
-	public function login_auth()
+	public function login_auth($username = NULL, $password = NULL)
 	{
 		$locale = $this->getLocale();
 		if (session()->has("isBlocked") && session("isBlocked") != NULL) return view("blocked", ["locale" => $locale]);
 		if ($this->captchaAttemps() >= $this->maxCaptchaAttemps) return $this->blockIp();
 		if ($this->loginAttemps() > $this->maxLoginAttemps) return $this->reCaptcha();
-		$username = $this->request->getPost('am_username');
-		$password = $this->request->getPost('am_password');
+		if($username == NULL || $password == NULL) {
+			$username = $this->request->getPost('am_username');
+			$password = md5($this->request->getPost('am_password'));
+		}
 
 		if ($password != NULL && $username != NULL) {
-			$logedIn = $this->userModel->where(['username' => $username, 'password' => md5($password)])->first();
+			$logedIn = $this->userModel->where(['username' => $username, 'password' => $password])->first();
 			if ($logedIn) {
 				session()->set("loginAttemps", 0);
 				$sessData = [];
@@ -85,6 +87,7 @@ class Home extends BaseController
 					$sessData[$key] = $value;
 				}
 				session()->set($sessData);
+				if($this->request->getPost('keepalive') == 1) session()->set('keepalive', 1);
 				switch ($logedIn->level) {
 					case 'superadministrator':
 						session()->set('levelCaption', 'Super Administrator');
@@ -198,9 +201,9 @@ class Home extends BaseController
 			imagefttext($baseImg, $fontSize, $angle, $lastX, mt_rand(45, 67), $textColor, $font, $value);
 			$lastX += $fontSize + mt_rand(15, 30);
 		}
-		header("Content-type: image/png");
+		$this->response->setContentType('image/png');
 		imagepng($baseImg);
-		imagedestroy($baseImg);
+		imagedestroy($baseImg); // dispose image to save memory
 	}
 
 	public function blockIp()
