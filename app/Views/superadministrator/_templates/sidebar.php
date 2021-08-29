@@ -38,7 +38,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo (base_url('superadministrator/Master/sold')) ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fa fa-money-check-alt nav-icon"></i>
                                 <p><?php echo (lang('Sidebar.AssetsSold', [], $Page->locale)) ?></p>
                             </a>
                         </li>
@@ -119,7 +119,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="<?php echo (base_url('superadministrator/Dashboard/simulation')) ?>" class="nav-link">
-                        <i class="nav-icon fas fa-circle"></i>
+                        <i class="nav-icon fas fa-balance-scale-right"></i>
                         <p>
                             <?php echo (lang('Sidebar.Simulation', [], $Page->locale)) ?>
                         </p>
@@ -138,26 +138,26 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?php echo (base_url('superadministrator/Users_account/index/superadministrator')) ?>" class="nav-link">
-                                <i class="fa fa-user nav-icon"></i>
+                                <i class="fa fa-id-badge nav-icon"></i>
                                 <p>Superadministrator</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo (base_url('superadministrator/Users_account/index/administrator')) ?>" class="nav-link">
-                                <i class="fa fa-user nav-icon"></i>
+                                <i class="fa fa-id-badge nav-icon"></i>
                                 <p>Administrator</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo (base_url('superadministrator/Users_account/index/user')) ?>" class="nav-link">
-                                <i class="fa fa-user nav-icon"></i>
+                                <i class="fa fa-id-badge nav-icon"></i>
                                 <p>User</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo (base_url('superadministrator/Users_account/index')) ?>" class="nav-link">
-                                <i class="fa fa-circle nav-icon"></i>
-                                <p><?php echo (lang('Sidebar.AllUser', [], 'locale')) ?></p>
+                                <i class="fa fa-user-friends nav-icon"></i>
+                                <p><?php echo (lang('Sidebar.AllUser', [], $Page->locale)) ?></p>
                             </a>
                         </li>
                     </ul>
