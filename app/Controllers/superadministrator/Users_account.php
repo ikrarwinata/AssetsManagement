@@ -301,7 +301,7 @@ class Users_account extends BaseController
         };
 
         $data = [
-            // 'username' => $this->request->getPost('username'),
+            'username' => $this->request->getPost('username'),
             'password' => $this->request->getPost('password'),
             'full_name' => $this->request->getPost('full_name'),
             'nick_name' => $this->request->getPost('nick_name'),
@@ -384,7 +384,7 @@ class Users_account extends BaseController
         };
 
         $data = [
-            // 'username' => $this->request->getPost('username'),
+            'username' => $this->request->getPost('username'),
             'password' => $this->request->getPost('password'),
             'full_name' => $this->request->getPost('full_name'),
             'nick_name' => $this->request->getPost('nick_name'),

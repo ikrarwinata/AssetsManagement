@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo ($locale) ?>">
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Assets Management | Log in</title>
+	<title>Log in</title>
 	<base href="<?php echo (base_url()) ?>">
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="assets/plugins/flag-icon-css/css/flag-icon.min.css">
 	<!-- icheck bootstrap -->
 	<link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 	<!-- Theme style -->
@@ -25,10 +26,10 @@
 		<!-- /.login-logo -->
 		<div class="card card-outline card-primary">
 			<div class="card-header text-center">
-				<a href="<?php echo (base_url('Home')) ?>" class="h1"><b>Login</b></a>
+				<a href="<?php echo (base_url('Home')) ?>" class="h1"><b>Login Page</b></a>
 			</div>
 			<div class="card-body">
-				<p class="login-box-msg">Sign in to start your session</p>
+				<p class="login-box-msg"><?php echo (lang('Text.SignInInfo', [], $locale)) ?></p>
 
 				<form action="<?php echo (base_url('Home/login_auth')) ?>" method="post">
 					<div class="input-group mb-3">
@@ -52,20 +53,26 @@
 							<div class="icheck-primary">
 								<input type="checkbox" id="remember" name="keepalive" checked value="1">
 								<label for="remember">
-									Remember Me
+									<?php echo (lang('Button.RememberLogin', [], $locale)) ?>
 								</label>
 							</div>
 						</div>
 						<!-- /.col -->
 						<div class="col-4">
-							<button type="submit" class="btn btn-primary btn-block">Sign In</button>
+							<button type="submit" class="btn btn-primary btn-block"><?php echo (lang('Button.SignIn', [], $locale)) ?></button>
 						</div>
 						<!-- /.col -->
 					</div>
 				</form>
-
+				<hr>
+				<div class="text-center">
+					<small>
+						<a href="<?php echo (base_url('id/Home')) ?>" class="text-success" title="Language (indonesia)"><i class="flag-icon flag-icon-id mr-2"></i></a>&nbsp;|&nbsp;<a href="<?php echo (base_url('en/Home')) ?>" class="text-success" title="Language (english)"><i class="flag-icon flag-icon-us ml-2"></i></a>
+					</small>
+				</div>
+				<hr>
 				<p class="mb-1">
-					<a href="forgot-password.html">I forgot my password</a>
+					<a href="forgot-password.html"><?php echo (lang('Button.ForgotPassword', [], $locale)) ?></a>
 				</p>
 			</div>
 			<!-- /.card-body -->

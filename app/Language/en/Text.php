@@ -62,5 +62,6 @@ return [
 
     'SelectAssets' => 'Select Asset',
 
-    'UseComa' => 'Use , (coma) for decimals'
+    'UseComa' => 'Use , (coma) for decimals',
+    'SignInInfo' => 'Sign in to start your session',
 ];

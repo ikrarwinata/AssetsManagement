@@ -18,11 +18,11 @@ return [
     'ResetSearch' => 'Reset',
     'Truncate' => 'Bersihkan Semua Data',
     'Show' => 'Tampilkan',
-    'ForgotPassword' => 'Lupa password?',
+    'ForgotPassword' => 'Saya lupa kata sandi',
     'Login' => 'Masuk',
     'Logout' => 'Keluar',
     'Profile' => 'Profil Saya',
-    'RememberLogin' => 'Ingat saya',
+    'RememberLogin' => 'Ingat Saya',
     'Generate' => 'Buat',
     'TruncateData' => 'Bersihkan data {obj}',
 ];

@@ -62,5 +62,6 @@ return [
 
     'SelectAssets' => 'Pilih Asset',
 
-    'UseComa' => 'Gunakan , (tanda koma) untuk bilangan pecahan'
+    'UseComa' => 'Gunakan , (tanda koma) untuk bilangan pecahan',
+    'SignInInfo' => 'Silahkan masuk untuk memulai',
 ];
