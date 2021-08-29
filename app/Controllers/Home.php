@@ -87,12 +87,15 @@ class Home extends BaseController
 				session()->set($sessData);
 				switch ($logedIn->level) {
 					case 'superadministrator':
-						return redirect()->to("/superadministrator/Master");
+						session()->set('levelCaption', 'Super Administrator');
+						return redirect()->to("/superadministrator/Dashboard");
 						break;
 					case 'admin':
+						session()->set('levelCaption', 'Administrator');
 						return redirect()->to("/administrator/Dashboard");
 						break;
 					case 'user':
+						session()->set('levelCaption', 'User');
 						return redirect()->to("/user/Dashboard");
 						break;
 					default:
@@ -213,6 +216,7 @@ class Home extends BaseController
 
 	private function clearSession()
 	{
+		session()->remove("levelCaption");
 		session()->remove("loginAttemps");
 		session()->remove("login");
 		session()->remove("login_name");

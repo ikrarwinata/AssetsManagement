@@ -3,7 +3,7 @@
 return [
     'CreateItem'     => 'Tambah Data',
     'UpdateItem'     => 'Ubah Data',
-    'TotalData'         => 'Menampilkan <strong>{start, number, integer}</strong> - <strong>{end, number, integer}</strong> dari <strong>{total, number, integer}</strong> data',
+    'TotalData'         => 'Menampilkan <strong>{start, number, integer}</strong> - <strong>{end, number, integer}</strong> dari total <strong>{total, number, integer}</strong> data',
     'CreateSuccess'     => 'Berhasil menambahkan data !',
     'UpdateSuccess'     => 'Data berhasil diubah !',
     'DeleteSuccess'     => 'Data berhasil dihapus !',
