@@ -34,8 +34,10 @@ return [
     'Settings' => 'Pengaturan',
     'Barcode' => 'Barcode',
     'CustomizePrice' => 'Menyesuaikan Harga',
+    'Price' => 'Harga',
     'TruncateData' => 'Mengosongkan Data',
     'Return' => 'Pengembalian Barang',
+    'Description' => 'Deskripsi',
 
     'CreateVendor' => 'Tambah data Vendor',
     'CreateAssets' => 'Tambah data Barang',
@@ -59,4 +61,6 @@ return [
     'Accumulation' => 'Total Akumulasi',
 
     'SelectAssets' => 'Pilih Asset',
+
+    'UseComa' => 'Gunakan , (tanda koma) untuk bilangan pecahan'
 ];

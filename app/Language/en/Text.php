@@ -34,8 +34,10 @@ return [
     'Settings' => 'Settings',
     'Barcode' => 'Barcode',
     'CustomizePrice' => 'Customize Price',
+    'Price' => 'Price',
     'TruncateData' => 'Clear data',
     'Return' => 'Returning Item',
+    'Description' => 'Description',
 
     'CreateVendor' => 'Add new Vendor',
     'CreateAssets' => 'Add new Barang',
@@ -59,4 +61,6 @@ return [
     'Accumulation' => 'Total Accumulation',
 
     'SelectAssets' => 'Select Asset',
+
+    'UseComa' => 'Use , (coma) for decimals'
 ];
