@@ -21,6 +21,7 @@ return [
     'AllAssets' => 'All Assets',
     'AssetsSold' => 'Assets Sold',
     'AllHistory' => 'All History',
+    'History' => 'History',
     'AllItems' => 'All Items',
     'IncomingItems' => 'Incoming Items',
     'OutcomingItems' => 'Outcoming Items',
@@ -35,5 +36,7 @@ return [
     'Report' => 'Report',
     'ProfitLoss' => 'Profit And Loss',
     'ReturnItem' => 'Return Item',
-    'Simulation' => 'Simulation'
+    'Simulation' => 'Simulation',
+    'SignOut' => 'Sign Out',
+    'Profile' => 'Profile',
 ];

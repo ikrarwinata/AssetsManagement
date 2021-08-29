@@ -6,9 +6,11 @@
 <body class="hold-transition layout-fixed layout-navbar-fixed sidebar-mini">
 	<div class="wrapper">
 		<!-- Preloader -->
-		<div class="preloader flex-column justify-content-center align-items-center">
-			<img class="animation__shake" src="assets/img/asset.png" alt="AdminLTELogo" height="60" width="60">
-		</div>
+		<?php if (isset($loader) && $loader == 1) : ?>
+			<div class="preloader flex-column justify-content-center align-items-center">
+				<img class="animation__shake" src="assets/img/asset.png" alt="AdminLTELogo" height="60" width="60">
+			</div>
+		<?php endif; ?>
 
 		<!-- Navbar -->
 		<?php echo view($Template->navbar); ?>

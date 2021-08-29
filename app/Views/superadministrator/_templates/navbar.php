@@ -145,9 +145,46 @@
 			</div>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" data-widget="fullscreen" href="#" role="button">
+			<a class="nav-link" data-widget="fullscreen" href="#" role="button" onclick="return false;">
 				<i class="fas fa-expand-arrows-alt"></i>
 			</a>
+		</li>
+		<li class="nav-item dropdown user-menu">
+			<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+				<img src="assets/img/user.png" class="user-image img-circle elevation-2" alt="User Image">
+				<span class="d-none d-md-inline"><?php echo (session("nick_name")) ?></span>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+				<!-- User image -->
+				<li class="user-header bg-primary">
+					<img src="assets/img/user.png" class="img-circle elevation-2" alt="User Image">
+
+					<p>
+						<?php echo (session("full_name")) ?>
+						<small class="text-warning"><?php echo (strtoupper(session("level"))) ?></small>
+					</p>
+				</li>
+				<!-- Menu Body -->
+				<li class="user-body">
+					<div class="row">
+						<div class="col-4 text-center">
+							<a href="<?php echo (base_url('superadministrator/Purchases/history_of/' . urlencode(base64_encode(session('username'))))) ?>"><?php echo (lang('Sidebar.Purchases', [], $Page->locale)) ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="<?php echo (base_url('superadministrator/Sales/history_of/' . urlencode(base64_encode(session('username'))))) ?>"><?php echo (lang('Sidebar.Sales', [], $Page->locale)) ?></a>
+						</div>
+						<div class="col-4 text-center">
+							<a href="<?php echo (base_url('superadministrator/Master/history_of/' . urlencode(base64_encode(session('username'))))) ?>"><?php echo (lang('Sidebar.History', [], $Page->locale)) ?></a>
+						</div>
+					</div>
+					<!-- /.row -->
+				</li>
+				<!-- Menu Footer-->
+				<li class="user-footer">
+					<a href="<?php echo (base_url('superadministrator/Users_account/profile/' . urlencode(base64_encode(session('username'))))) ?>" class="btn btn-default btn-flat"><?php echo (lang('Sidebar.Profile', [], $Page->locale)) ?></a>
+					<a href="<?php echo (base_url('Home/logout')) ?>" class="btn btn-default btn-flat float-right"><?php echo (lang('Sidebar.SignOut', [], $Page->locale)) ?></a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </nav>

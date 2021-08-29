@@ -21,6 +21,7 @@ return [
     'AllAssets' => 'Semua Assets',
     'AssetsSold' => 'Assets Terjual',
     'AllHistory' => 'Semua Riwayat Transaksi',
+    'History' => 'Riwayat',
     'AllItems' => 'Semua Barang',
     'IncomingItems' => 'Barang Masuk',
     'OutcomingItems' => 'Barang Keluar',
@@ -35,5 +36,7 @@ return [
     'Report' => 'Laporan',
     'ProfitLoss' => 'Laba & Rugi',
     'ReturnItem' => 'Pengembalian Barang',
-    'Simulation' => 'Simulasi'
+    'Simulation' => 'Simulasi',
+    'SignOut' => 'Keluar',
+    'Profile' => 'Profil',
 ];

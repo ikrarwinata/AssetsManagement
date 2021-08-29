@@ -35,7 +35,7 @@
 						<input type="username" name="am_username" class="form-control" placeholder="Username" required>
 						<div class="input-group-append">
 							<div class="input-group-text">
-								<span class="fas fa-envelope"></span>
+								<span class="fas fa-user"></span>
 							</div>
 						</div>
 					</div>

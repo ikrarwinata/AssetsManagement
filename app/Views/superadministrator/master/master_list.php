@@ -16,7 +16,7 @@ $this->section('content');
             <!--ENDIMPORTEXCELFILE-->
             <!--EXPORTBUTTONS-->
             <div class="dropdown">
-                <button class="btn btn-sm btn-info dropdown-toggle ml-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-sm btn-info dropdown-toggle ml-2 <?php echo (count($data) == 0 ? 'disabled' : NULL) ?>" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Export
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
