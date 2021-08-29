@@ -15,7 +15,7 @@ class Home extends BaseController
 		$this->userModel = new Users_account_model();
 		
 	}
-
+	
 	public function languange($rdr = NULL){
 		$this->setLocale();
 		return $this->index($rdr);
