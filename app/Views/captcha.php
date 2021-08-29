@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo ($locale) ?>">
+<html lang="<?php echo $locale ?>">
 
 <head>
   <meta charset="utf-8">
@@ -30,10 +30,10 @@
       <form class="lockscreen-credentials" action="<?php echo (base_url('Home/reCaptcha')) ?>" method="POST" style="margin-left: 8px;">
         <div class="input-group">
           <img src="<?php echo (base_url('Home/captchaImage')) ?>" alt="captchaImage">
-          <span style="right: 8px; bottom: 0px; z-index: 1;position: absolute; opacity: .5;"><a href="<?php echo (base_url('Home/reCaptcha')) ?>" class="btn btn-sm btn-primary" title="<?php echo (lang('Button.reCaptcha', [], $locale)) ?>"><i class="fa fa-retweet text-primary"></i></a></span>
+          <span style="right: 8px; bottom: 0px; z-index: 1;position: absolute; opacity: .5;"><a href="<?php echo (base_url('Home/reCaptcha')) ?>" class="btn btn-sm btn-primary" title="<?php echo (lang('Button.reCaptcha')) ?>"><i class="fa fa-retweet text-primary"></i></a></span>
         </div>
         <div class="input-group">
-          <small class="text-primary" style="font-size: 11px;"><?php echo (lang('Text.DescriptCaptcha', [], $locale)) ?></small>
+          <small class="text-primary" style="font-size: 11px;"><?php echo (lang('Text.DescriptCaptcha')) ?></small>
         </div>
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Input Captcha" name="captcha" required minlength="4" maxlength="7" autofocus autocomplete="off">
@@ -48,7 +48,7 @@
     </div>
     <!-- /.lockscreen-item -->
     <div class="help-block text-center">
-      <?php echo (lang('Text.Captcha', [], $locale)) ?>
+      <?php echo (lang('Text.Captcha')) ?>
     </div>
     <?php echo view('_templates/footer'); ?>
   </div>

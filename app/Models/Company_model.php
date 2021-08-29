@@ -40,6 +40,16 @@ class Company_model extends Model
         return $this->allowedFields;
     }
 
+    public function getKeys()
+    {
+        $temp = [];
+        $load = $this->findAll();
+        foreach ($load as $key => $value) {
+            $temp[] = $value->index_key;
+        };
+        return $temp;
+    }
+
     public function getById($id)
     {
         return $this->where($this->primaryKey, $id)->sort()->first();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo ($locale) ?>">
+<html lang="<?php echo $locale ?>">
 
 <head>
   <meta charset="utf-8">
@@ -29,7 +29,7 @@
         $H = timeLog(session("blockTime") + session("blockTimeout"), "%H");
         $i = timeLog(session("blockTime") + session("blockTimeout"), "%i");
         $s = timeLog(session("blockTime") + session("blockTimeout"), "%s");
-        echo (lang('Text.IpBlocked', ['H' => $H, 'i' => $i, 's' => $s], $locale)) ?>
+        echo (lang('Text.IpBlocked', ['H' => $H, 'i' => $i, 's' => $s])) ?>
       </small>
     </div>
 

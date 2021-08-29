@@ -59,6 +59,10 @@ return [
     'PurchaseValues' => 'Purchase Values',
     'SaleValues' => 'Sale Values',
     'Accumulation' => 'Total Accumulation',
+    
+    'Captcha' => 'Please confirm you are not a robot',
+    'DescriptCaptcha' => 'Enter the text above, No Spaces, Case Sensitive',
+    'IpBlocked' => 'To many request from your connection, please try again after : <br> {H} Hour {i} Minute {s} Second',
 
     'SelectAssets' => 'Select Asset',
 

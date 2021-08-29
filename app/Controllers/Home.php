@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\Users_account_model;
+use App\Models\Company_model;
 
 class Home extends BaseController
 {
 	protected $maxLoginAttemps = 3;
 	protected $maxCaptchaAttemps = 3;
 	protected $userModel;
+	protected $companyModel;
 
 	protected function onLoad()
 	{
 		$this->userModel = new Users_account_model();
+		$this->companyModel = new Company_model();
 		
 	}
 	
@@ -113,7 +116,7 @@ class Home extends BaseController
 		};
 		session()->setFlashdata('ci_login_flash_message', lang('Errors.LoginFailed', [], $locale));
 		session()->setFlashdata('ci_login_flash_message_type', 'error');
-		return view("login", ["locale" => $locale]);
+		return redirect()->to("/Home/login");
 	}
 
 	public function reCaptcha()
@@ -220,12 +223,10 @@ class Home extends BaseController
 	private function clearSession()
 	{
 		session()->remove("levelCaption");
-		session()->remove("loginAttemps");
-		session()->remove("login");
-		session()->remove("login_name");
 		session()->remove("keepalive");
 
 		session()->remove($this->userModel->getFields());
+		session()->remove($this->companyModel->getKeys());
 		return TRUE;
 	}
 

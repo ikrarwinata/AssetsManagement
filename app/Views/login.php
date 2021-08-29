@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo ($locale) ?>">
+<html lang="<?php echo $locale ?>">
 
 <head>
 	<meta charset="utf-8">
@@ -29,7 +29,7 @@
 				<a href="<?php echo (base_url('Home')) ?>" class="h1"><b>Login Page</b></a>
 			</div>
 			<div class="card-body">
-				<p class="login-box-msg"><?php echo (lang('Text.SignInInfo', [], $locale)) ?></p>
+				<p class="login-box-msg"><?php echo (lang('Text.SignInInfo')) ?></p>
 
 				<form action="<?php echo (base_url('Home/login_auth')) ?>" method="post">
 					<div class="input-group mb-3">
@@ -53,13 +53,13 @@
 							<div class="icheck-primary">
 								<input type="checkbox" id="remember" name="keepalive" checked value="1">
 								<label for="remember">
-									<?php echo (lang('Button.RememberLogin', [], $locale)) ?>
+									<?php echo (lang('Button.RememberLogin')) ?>
 								</label>
 							</div>
 						</div>
 						<!-- /.col -->
 						<div class="col-4">
-							<button type="submit" class="btn btn-primary btn-block"><?php echo (lang('Button.SignIn', [], $locale)) ?></button>
+							<button type="submit" class="btn btn-primary btn-block"><?php echo (lang('Button.SignIn')) ?></button>
 						</div>
 						<!-- /.col -->
 					</div>
@@ -72,7 +72,7 @@
 				</div>
 				<hr>
 				<p class="mb-1">
-					<a href="forgot-password.html"><?php echo (lang('Button.ForgotPassword', [], $locale)) ?></a>
+					<a href="forgot-password.html"><?php echo (lang('Button.ForgotPassword')) ?></a>
 				</p>
 			</div>
 			<!-- /.card-body -->

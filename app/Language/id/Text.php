@@ -60,6 +60,10 @@ return [
     'SaleValues' => 'Jumlah Pengeluaran',
     'Accumulation' => 'Total Akumulasi',
 
+    'Captcha' => 'Silahkan konfirmasi bahwa anda bukan robot',
+    'DescriptCaptcha' => 'Masukan tulisan diatas, Tanpa Spasi, Case Sensitive',
+    'IpBlocked' => 'Terlalu banyak permintaan dari koneksi anda, coba lagi setelah : <br> {H} Jam {i} Menit {s} Detik',
+
     'SelectAssets' => 'Pilih Asset',
 
     'UseComa' => 'Gunakan , (tanda koma) untuk bilangan pecahan',
